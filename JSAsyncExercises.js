@@ -84,14 +84,56 @@ function waitAll() {
             res("third");
         }, 3000);
     });
-    return Promise.all([timerA,timerB,timerC]);
+    return Promise.all([timerA, timerB, timerC]);
 
 }
-waitAll().then(result=>{
+waitAll().then(result => {
     console.log(result);
 }).catch(
-error => console.log(error)
+    error => console.log(error)
 );
 
 //7
 //8
+function chainedGreetings(ms) {
+    return new Promise((req, res) => {
+        setTimeout(req, ms);
+
+    })
+}
+chainedGreetings(1000)
+    .then(() => {
+        console.log("hi");
+        return chainedGreetings(2000);
+    })
+    .then(() => {
+        console.log("How are you?");
+        return chainedGreetings(3000);
+    }).then(() => {
+        console.log("Goodbye!");
+    }).catch(
+        error => console.log(error)
+    )
+ 
+//9 
+// function processFile(inputPath, outputPath) {
+
+//     return fs.readFile(inputPath, "utf8")
+
+//         .then(content => {
+//             const wordCount = content.trim().split(/\s+/).length;
+
+//             return fs.writeFile(
+//                 outputPath,
+//                 `Word count: ${wordCount}`
+//             );
+//         })
+
+//         .then(() => {
+//             console.log(`Word count written to ${outputPath}`);
+//         })
+
+//         .catch(error => {
+//             console.log("Error:", error.message);
+//         });
+// } 
